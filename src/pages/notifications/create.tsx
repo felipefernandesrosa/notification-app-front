@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import {getNotifications, getClients, createNotification} from '@/api'
 import createNotificationSchema from '@/_schema/createNotification'
-import {redirect} from "next/navigation";
+import {useRouter} from 'next/router'
 import {useEffect, useState} from "react"
 import {Col, Container, Row, Form, Button} from 'react-bootstrap'
 import Header from "@/components/Header";
@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 export default() =>
 {
   const [clients, setClients] = useState([])
+  const router = useRouter()
 
   useEffect(() => {
     dispatchFetchClients()
@@ -21,7 +22,7 @@ export default() =>
   }
   const dispatchFetchCreateSignature = (params: object) => {
     createNotification(params).then((params: object) => {
-      redirect('/')
+      router.push("/")
     })
   }
 

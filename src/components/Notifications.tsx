@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import * as process from 'process'
 import {Col, Container, Row, Table, Button} from 'react-bootstrap'
+import {log} from "util";
 // @ts-ignore
 const fetcher = (...args: any) => fetch(...args).then((res) => res.json())
 
@@ -33,8 +34,8 @@ export default () => {
               {data.map((item: Notifications) => (
                 <tr>
                   <td>{item['message']}</td>
-                  <td>{Array(item['subscribed']).map((value) => value+',')}</td>
-                  <td>{Array(item['channels']).map((value) => value+',')}</td>
+                  <td>{item['subscribed'].map((value, index) => (item['subscribed'].length !== index+1) ? value+',' : value)}</td>
+                  <td>{item['channels'].map((value, index) => (item['channels'].length !== index+1) ? value+',' : value)}</td>
                 </tr>
               ))}
             </tbody>
